@@ -2,15 +2,19 @@ import React, { useEffect } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
-
 import { Navbar, Footer, Sidebar, ThemeSettings } from "./components";
 
 import { useState } from "react";
 
-import { Ecommerce, Calendar, Employees, Customers, Editor } from "./pages";
+import { Ecommerce, Calendar, Employees, Customers, Editor, HomeAdmin, Reciplas } from "./pages";
+import { useStateContext } from "./contexts/ContextProvider";
 
 const App = () => {
-  const [activeMenu, setactiveMenu] = useState(false);
+
+  const {activeMenu, setactiveMenu} = useStateContext()
+
+
+  // const [activeMenu, setactiveMenu] = useState(false);
 
   return (
     <>
@@ -28,7 +32,7 @@ const App = () => {
           </div> */}
 
           {activeMenu ? (
-            <div className="bg-emerald-800 w-72 fixed sidebar dark:bg-secondary-dark-bg transition-all duration-300">
+            <div className="bg-emerald-700 w-72 fixed sidebar dark:bg-secondary-dark-bg transition-all duration-300">
               <Sidebar />
             </div>
           ) : (
@@ -38,7 +42,7 @@ const App = () => {
           )}
 
           <button
-            className="fixed right-4 bottom-4" style={{ zIndex: "1000" }}
+            className="fixed right-4 bottom-4 hover:bg-emerald-700 transition-all duration-300 p-2 hover:rounded-lg hover:text-white " style={{ zIndex: "1000" }}
             type="button"
             onClick={() => {
               if (activeMenu) {
@@ -66,13 +70,21 @@ const App = () => {
               <Routes>
                 {/* dashboard */}
 
-                <Route path="/" element={<Ecommerce />} />
+                
+                <Route path="/" element={<Reciplas />} />
+
+                <Route path="/home-admin" element={<HomeAdmin/>}/>
+                
                 <Route path="/ecommerce" element={<Ecommerce />} />
 
                 {/* Pages */}
 
                 <Route path="/employees" element={<Employees />} />
+                
+                
                 <Route path="/Customers" element={<Customers />} />
+
+
               </Routes>
             </div>
           </div>
